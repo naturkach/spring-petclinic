@@ -6,6 +6,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh './mvnw compile'
+                archiveArtifacts artifacts: 'target/*'
             }
         }
         stage('Test') {
