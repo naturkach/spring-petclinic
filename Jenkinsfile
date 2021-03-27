@@ -23,18 +23,18 @@ pipeline {
                        }
                    }
             }
-        stage('Push Docker Image') {
-            when {
-                branch 'main'
-            }
-            steps {
+ //       stage('Push Docker Image') {
+  //          when {
+ //               branch 'main'
+  //          }
+   //         steps {
      //           docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
      //               app.push("${env.BUILD_NUMBER}")
      //               app.push("latest")
     //            }
-            }
+  //         }
             
-        }
+//        }
         
 
         
