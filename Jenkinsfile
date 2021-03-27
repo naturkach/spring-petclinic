@@ -15,7 +15,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 script {
@@ -25,7 +25,7 @@ pipeline {
             }
         stage('Push Docker Image') {
             when {
-                branch 'master'
+                branch 'main'
             }
             steps {
                 docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
