@@ -1,9 +1,5 @@
 pipeline {
     agent any
-    environment {
-        DOCKER_IMAGE_NAME = "naturkach/petclinic"   
-    }
-
     stages {
         stage('Build') {
             steps {
@@ -13,16 +9,13 @@ pipeline {
             }
         
         }
-        stage('Build Docker Image') {
-            when {
-                branch 'main'
-            }
+        stage('Build Docker Image') {            
             steps {
-                script {
-                    app = docker.build(DOCKER_IMAGE_NAME)
+                script {                    
+                       app = docker.build("naturkach/petclinic")
                        }
-                   }
-            }
+                  }
+        }
 //       stage('Push Docker Image') {
 //          when {
 //               branch 'main'
