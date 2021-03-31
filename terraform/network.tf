@@ -8,6 +8,7 @@ resource "aws_vpc" "vpc_lab" {
   }
 }
 
+
 #Create IGW
 resource "aws_internet_gateway" "lab_gw" {
   vpc_id = aws_vpc.vpc_lab.id
@@ -34,20 +35,23 @@ resource "aws_subnet" "subnet_cd" {
   }
 }
 
+
 #Create route table
 resource "aws_route_table" "internet_route_lab" {
   vpc_id = aws_vpc.vpc_lab.id
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.lab_gw.id
-  }
+ 
   lifecycle {
     ignore_changes = all
   }
   tags = {
     Name = "lab-route-table"
   }
+ }
 }
+
 
 #assosiate networks with route table
 resource "aws_route_table_association" "ci_assoc" {
@@ -59,7 +63,7 @@ resource "aws_route_table_association" "cd_assoc" {
   route_table_id = aws_route_table.internet_route_lab.id
 }
 
-#################
+
 #SGroups
 #Create SG for allowing TCP/8080 from * and TCP/22 from *
 resource "aws_security_group" "lab-sg" {
@@ -91,3 +95,4 @@ resource "aws_security_group" "lab-sg" {
     Name = "lab security group"
   }
 }
+
