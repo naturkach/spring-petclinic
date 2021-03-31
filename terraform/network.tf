@@ -42,14 +42,14 @@ resource "aws_route_table" "internet_route_lab" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.lab_gw.id
- 
-  lifecycle {
-    ignore_changes = all
+
+    lifecycle {
+      ignore_changes = all
+    }
+    tags = {
+      Name = "lab-route-table"
+    }
   }
-  tags = {
-    Name = "lab-route-table"
-  }
- }
 }
 
 
