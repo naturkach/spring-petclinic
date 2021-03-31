@@ -1,8 +1,3 @@
-provider "aws" {
-  region = "eu-central-1"
-}
-
-#########
 #Create VPC
 resource "aws_vpc" "vpc_lab" {
   cidr_block           = "192.168.2.0/23"

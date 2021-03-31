@@ -10,4 +10,5 @@ target/*
 .sts4-cache/
 .vscode
 _site/
+/terraform/.terraform
 /terraform/*terraform*
