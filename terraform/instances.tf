@@ -29,3 +29,19 @@ EOF
     Name = "jenkins_master_tf"
   }
 }
+
+
+#Create and bootstrap Prod EC2 server
+resource "aws_instance" "prod-host" {
+
+  ami                         = data.aws_ssm_parameter.MasterAmi.value
+  instance_type               = "t2.micro"
+  key_name                    = aws_key_pair.master-key.key_name
+  associate_public_ip_address = true
+  vpc_security_group_ids      = [aws_security_group.lab-sg.id]
+  subnet_id                   = aws_subnet.subnet_cd.id
+  tags = {
+    Name = "Production server"
+  }
+}
+
