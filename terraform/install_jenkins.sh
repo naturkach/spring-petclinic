@@ -17,7 +17,7 @@ yum install docker -y
 #sudo chkconfig docker on 
 
 echo "Install Jenkins" >> /home/ec2-user/log
-wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
+wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
 rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 yum upgrade
 yum install -y jenkins  >> /home/ec2-user/log
