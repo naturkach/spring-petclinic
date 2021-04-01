@@ -1,11 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build') {           
+           
             steps {
-                echo 'Building..'
-                sh './mvnw package'
-                archiveArtifacts artifacts: 'target/*'
+                dir ('test') {
+                    echo 'Building..'
+                    sh './mvnw package'
+                    archiveArtifacts artifacts: '../target/*'
+                }
             }
         
         }
