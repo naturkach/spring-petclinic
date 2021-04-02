@@ -1,11 +1,14 @@
 pipeline {
     agent any
     stages {
-        stage('Build') {
+        stage('Build') {           
+           
             steps {
-                echo 'Building..'
-                sh './mvnw package'
-                archiveArtifacts artifacts: 'target/*'
+                dir ('test') {
+                    echo 'Building..'
+                    sh './mvnw package'
+                    archiveArtifacts artifacts: '../target/*'
+                }
             }
         
         }
@@ -16,25 +19,23 @@ pipeline {
                        }
                   }
         }
-//       stage('Push Docker Image') {
-//          when {
-//               branch 'main'
-//          }
-   //         steps {
-     //           docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-     //               app.push("${env.BUILD_NUMBER}")
-     //               app.push("latest")
-    //            }
-  //         }
+        stage('Push Docker Image') {
+          
+            steps {
+                script {
+                  docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
+                    app.push("${env.BUILD_NUMBER}")
+                    app.push("latest")
+                    }
+                }
+            }
             
-//        }
-        
+        }    
 
-        
-        
+               
         stage('Test') {
             steps {
-                echo 'Testing..'
+                echo 'test2 Testing..'
             }
         }
         stage('Deploy') {
