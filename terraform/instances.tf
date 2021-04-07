@@ -24,7 +24,7 @@ resource "aws_instance" "jenkins-master" {
 }
 
 
-#Create and bootstrap Prod EC2 server
+#Create and bootstrap CI env EC2 server
 resource "aws_instance" "prod-host" {
 
   ami                         = data.aws_ssm_parameter.MasterAmi.value
@@ -34,7 +34,7 @@ resource "aws_instance" "prod-host" {
   vpc_security_group_ids      = [aws_security_group.lab-sg.id]
   subnet_id                   = aws_subnet.subnet_cd.id
   tags = {
-    Name = "Production server"
+    Name = "CI environment"
   }
 }
 

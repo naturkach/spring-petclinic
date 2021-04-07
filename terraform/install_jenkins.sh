@@ -25,3 +25,6 @@ sudo usermod -a -G docker jenkins
 sudo chkconfig jenkins on
 sudo service docker start >> /home/ec2-user/log
 sudo service jenkins start >> /home/ec2-user/log
+
+echo "install Ansible"
+sudo amazon-linux-extras install ansible2 -y
