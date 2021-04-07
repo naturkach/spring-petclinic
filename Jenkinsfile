@@ -7,7 +7,7 @@ pipeline {
                 dir ('project') {
                     echo 'Building..'
                     sh './mvnw package'
-                    archiveArtifacts artifacts: '../target/*'
+                    archiveArtifacts artifacts: 'target/*'
                 }
             }
         
