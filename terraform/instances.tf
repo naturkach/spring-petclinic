@@ -17,7 +17,12 @@ resource "aws_instance" "jenkins-master" {
   associate_public_ip_address = true
   vpc_security_group_ids      = [aws_security_group.lab-sg.id]
   subnet_id                   = aws_subnet.subnet_ci.id
-  user_data                   = file("install_jenkins.sh")
+  user_data                   = file("install_soft.sh")
+  provisioner "file" {
+    source      = "~/.ssh/id_rsa"
+    destination = "~/.ssh/id_rsa"
+  }
+
   tags = {
     Name = "jenkins_master_tf"
   }
