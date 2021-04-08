@@ -18,14 +18,34 @@ resource "aws_instance" "jenkins-master" {
   vpc_security_group_ids      = [aws_security_group.lab-sg.id]
   subnet_id                   = aws_subnet.subnet_ci.id
   user_data                   = file("install_soft.sh")
+
   provisioner "file" {
-    source      = "~/.ssh/id_rsa"
-    destination = "~/.ssh/id_rsa"
+     source      = "~/.ssh/id_rsa"
+     destination = "~/.ssh/id_rsa"
+ 
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("~/.ssh/id_rsa")
+      host        = self.public_ip
+    }
+   }
+ 
+  provisioner "file" {
+  content      = "${aws_instance.prod-host.public_ip}"
+  destination = "/home/ec2-user/test"
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("~/.ssh/id_rsa")
+      host        = self.public_ip
+    }
   }
 
   tags = {
     Name = "jenkins_master_tf"
   }
+   depends_on = [aws_instance.prod-host]
 }
 
 

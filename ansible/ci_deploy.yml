@@ -1,0 +1,10 @@
+---
+- hosts: cideploy
+  become: yes
+
+  tasks:
+    - name: download docker image
+      docker_image:
+              name: naturkach/petclinic
+              tag: latest
+

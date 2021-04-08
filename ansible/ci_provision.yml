@@ -1,0 +1,12 @@
+---
+- name: install docker
+  become: yes
+  hosts: cideploy
+
+  tasks:
+  - name: install docker
+    command: amazon-linux-extras install docker -y
+
+  - name: Start and enable the Docker daemon
+    service: name=docker state=started enabled=yes
+
