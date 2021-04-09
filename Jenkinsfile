@@ -31,13 +31,8 @@ pipeline {
             }
             
         }    
-
-               
-        stage('Test') {
-            steps {
-                echo 'test2 Testing..'
-            }
-        }
+              
+      
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
